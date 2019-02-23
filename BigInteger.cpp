@@ -69,16 +69,21 @@ void BigInteger::Init(std::string value)
 	}
 
 	// 낮은 자릿수 부터 채워감
+	int numberCount = 0;
 	for (int i = 0; i < digitSize; i++)
 	{
 		char chr = chr_value[digitSize - i - 1];
 		if ('0' <= chr && chr <= '9')
 		{
 			this->value[i] = chr - '0';
+			if (++numberCount >= MAX_INPUT_SIZE)
+			{
+				break;
+			}
 		}
 	}
 
-	this->size = digitSize - (hasSignChar ? 1 : 0);
+	this->size = numberCount;
 }
 
 std::string BigInteger::ToString()
